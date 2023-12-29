@@ -1,4 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -8,9 +7,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" },
 ];
 
 export default function App() {
@@ -23,6 +24,9 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <header className="p-4">
+            <h1 className="text-center text-4xl">QUIZZ</h1>
+        </header>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
