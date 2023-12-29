@@ -12,7 +12,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-const createPrompt = (topic: string, difficulty: number) => {
+const createPrompt = (topic: string, difficulty: string) => {
     return `
         Give me a 3 question quizz about "${topic}".
         The difficulty must be a ${difficulty} out of 10.
