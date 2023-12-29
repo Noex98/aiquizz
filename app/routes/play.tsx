@@ -12,6 +12,6 @@ export default function play() {
     console.log(quizz)
 
     return (
-        <div>play</div>
+        <div>{JSON.stringify(quizz, null, 4)}</div>
     )
 }
