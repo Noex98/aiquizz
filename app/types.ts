@@ -1,6 +1,12 @@
-export type question = {
+export type Question = {
     question: string,
     correctAnswer: string,
 }
 
-export type quizz = question[]
+export type Language = "en" | "dk";
+
+export type Settings = {
+    language: Language
+}
+
+export type Quizz = Question[]

@@ -5,6 +5,9 @@ import { getSession, commitSession } from "~/utils/sessions.server";
 import { Glass } from "~/components";
 import { useState } from "react";
 import { Button } from "~/components/Button";
+import { TextInput } from "~/components/TextInput";
+import { Language } from "~/types";
+import { getSettings } from "~/utils/getSettings.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,7 +15,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-const createPrompt = (topic: string, difficulty: string) => {
+const createPrompt = (topic: string, difficulty: string, language: Language ) => {
     return `
         Give me a 3 question quizz about "${topic}".
         The difficulty must be a ${difficulty} out of 10.
@@ -23,6 +26,7 @@ const createPrompt = (topic: string, difficulty: string) => {
                 correctAnswer: string
             }
         ]
+        ${language === "dk" ? "The data iteself MUST be written in Danish" : ""}
     `
 }
 
@@ -34,6 +38,7 @@ export async function action({ request }: ActionFunctionArgs) {
     if(!topic || !difficulty) return null;
 
     const session = await getSession(request.headers.get("Cookie"));
+    const { language } = await getSettings(request.headers.get("Cookie"))
     
     const openai = new OpenAI({
         apiKey: process.env['OPENAI_API_KEY']
@@ -42,7 +47,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const completion = await openai.chat.completions.create({
         messages: [{ 
             role: 'user', 
-            content: createPrompt(topic, difficulty)
+            content: createPrompt(topic, difficulty, language)
         }],
         model: 'gpt-3.5-turbo-1106',
         response_format: { type: "json_object" },
@@ -71,13 +76,13 @@ export default function Index() {
     }
 
     return (
-        <main className="h-screen flex justify-center content-center">
+        <main className="h-screen flex justify-center">
             <div>
                 <Glass>
                     <Form method="post" className="h-auto flex flex-col gap-6">
                         <label>
                             <div>Topic:</div>
-                            <input required type="text" name="topic" />
+                            <TextInput required name="topic" />
                         </label>
                         <label>
                             <div>Difficulty:</div>

@@ -1,5 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
+import { IoMdSettings } from "react-icons/io";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -24,8 +26,13 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <header className="p-4">
-            <h1 className="text-center text-4xl">QUIZZ</h1>
+        <header className="p-4 relative">
+            <Link to="/">
+              <h1 className="text-center text-4xl">QUIZZ</h1>
+            </Link>
+            <Link className="absolute top-1/2 transform right-3 -translate-y-1/2" to ="/settings">
+              <IoMdSettings size={35}/>
+            </Link>
         </header>
         <Outlet />
         <ScrollRestoration />

@@ -1,5 +1,5 @@
 import { createCookieSessionStorage, createCookie } from "@remix-run/node";
-import { quizz } from "~/types";
+import { Quizz, Settings } from "~/types";
 
 export const sessionCookie = createCookie("__session", {
   maxAge: 60 * 60 * 24 * 7,
@@ -8,7 +8,8 @@ export const sessionCookie = createCookie("__session", {
 });
 
 type SessionData = {
-  quizz?: quizz
+  quizz?: Quizz
+  settings?: Settings
 }
 
 const { getSession, commitSession, destroySession } =
