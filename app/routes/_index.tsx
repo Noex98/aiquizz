@@ -69,7 +69,7 @@ export default function Index() {
     const { state } = useNavigation();
     const [difficulty, setDifficulty] = useState("5")
 
-    if(state == "idle"){
+    if(state !== "idle"){
         return (
             <main className="flex justify-center content-center">
                 <Spinner />
