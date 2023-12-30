@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
 
 const createPrompt = (topic: string, difficulty: string, language: Language ) => {
     return `
-        Give me a 3 question quizz about "${topic}".
+        Give me a 6 question quizz about "${topic}".
         The difficulty must be a ${difficulty} out of 10.
         You MUST answer with valid JSON in the following structure:
         type quizz = [
