@@ -2,7 +2,7 @@ import { redirect, type ActionFunctionArgs, type MetaFunction, json } from "@rem
 import { Form, useActionData, useLoaderData, useNavigation } from "@remix-run/react";
 import OpenAI from "openai";
 import { getSession, commitSession } from "~/utils/sessions.server";
-import { Glass } from "~/components";
+import { Glass, Spinner } from "~/components";
 import { useState } from "react";
 import { Button } from "~/components/Button";
 import { TextInput } from "~/components/TextInput";
@@ -69,9 +69,11 @@ export default function Index() {
     const { state } = useNavigation();
     const [difficulty, setDifficulty] = useState("5")
 
-    if(state !== "idle"){
+    if(state == "idle"){
         return (
-            <main>loading</main>
+            <main className="flex justify-center content-center">
+                <Spinner />
+            </main>
         )
     }
 
