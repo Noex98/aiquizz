@@ -19,6 +19,8 @@ const createPrompt = (topic: string, difficulty: string, language: Language ) =>
     return `
         Give me a 6 question quizz about "${topic}".
         The difficulty must be a ${difficulty} out of 10.
+The questions must have a concrete answer.
+I want the questions to be written in a fun tone, and possibly include puns.
         You MUST answer with valid JSON in the following structure:
         type quizz = [
             {
